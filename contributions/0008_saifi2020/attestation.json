@@ -1,0 +1,31 @@
+{
+  "contributor": "saifi2020",
+  "contributionNumber": "0008",
+  "timestamp": "2025-03-12T14:44:50.323Z",
+  "files": [
+    {
+      "filename": "prpConverter.zkey",
+      "hash": "4dfa07590ddd84e438b0a7efbeb047752ef646018116b3a6fffb311b4c215729"
+    },
+    {
+      "filename": "treeBatchUpdaterAndRootChecker.zkey",
+      "hash": "65b9ea788ef8f21e9b8c0e2176ec994b2948dedbbe9e17552420f74bb09d0fc8"
+    },
+    {
+      "filename": "zAccountRegistration.zkey",
+      "hash": "f99446a41b4300e9c6602ee9c5d17e5ee78b4b5071acc0ec3fd8db1f96c0a92d"
+    },
+    {
+      "filename": "zAccountRenewal.zkey",
+      "hash": "be92e0b5bd1a2ebf48d08541fd2cd1dd8a376d735134cc96fcb417f67b01f70e"
+    },
+    {
+      "filename": "zSwap.zkey",
+      "hash": "3226ff5f86fed9e70e6971a1bf60e237f7be89e0a8d0db3167e1d88e6581d88c"
+    },
+    {
+      "filename": "zTransaction.zkey",
+      "hash": "3c980473df1568ca627c7425ef18b7fcceb3b270b6c8e6225422efd40d809967"
+    }
+  ]
+}
