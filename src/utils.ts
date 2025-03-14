@@ -38,7 +38,7 @@ export function checkRequiredEnvVars(): void {
 export const contributionRootFolder = "./contributions";
 
 // Get S3 configuration from environment variables
-const S3_BUCKET_PATH = process.env.S3BUCKET!
+const S3_BUCKET_PATH = process.env.S3BUCKET!;
 export const S3_BUCKET_NAME = S3_BUCKET_PATH.replace("s3://", "");
 export const AWS_REGION = process.env.AWS_DEFAULT_REGION!;
 export const AWS_ENDPOINT = process.env.AWS_ENDPOINT_URL!;
@@ -456,4 +456,215 @@ export function ensurePtauFile(): string {
 // Add function to get the r1cs folder path
 export function getR1csFolderPath(): string {
   return path.join(process.cwd(), "r1cs");
+}
+
+// Function to ensure r1cs files are available
+export function ensureR1csFiles(): string {
+  const r1csFolder = "r1cs";
+  const r1csFolderPath = path.join(contributionRootFolder, r1csFolder);
+
+  // Create r1cs directory if it doesn't exist
+  fs.ensureDirSync(r1csFolderPath);
+
+  // Function to check if r1cs folder has required files
+  function hasRequiredR1csFiles(): boolean {
+    try {
+      const r1csFiles = fs.readdirSync(r1csFolderPath).filter((file) => file.endsWith(".r1cs"));
+      if (r1csFiles.length === 0) {
+        console.warn(`R1CS folder is missing required .r1cs files`);
+        return false;
+      }
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  // Check if r1cs folder exists AND has required files
+  if (!fs.existsSync(r1csFolderPath) || !hasRequiredR1csFiles()) {
+    console.log(`R1CS files not found locally or missing required files. Attempting to download from S3...`);
+
+    if (!isAwsCliAvailable()) {
+      console.warn("AWS CLI not available. Skipping S3 download.");
+      throw new Error("Cannot proceed without r1cs files and AWS CLI is not available");
+    }
+
+    const s3R1csPath = `${S3_BUCKET_PATH}/${r1csFolder}`;
+
+    try {
+      console.log(`Downloading r1cs files from ${s3R1csPath} to ${r1csFolderPath}...`);
+      const result = runAwsCommand(`aws s3 cp ${s3R1csPath} ${r1csFolderPath} --recursive`);
+
+      if (result === "") {
+        console.warn(`Failed to download r1cs files from S3`);
+        throw new Error("Cannot proceed without r1cs files");
+      }
+    } catch (error) {
+      console.error(`Error downloading r1cs files from S3: ${error}`);
+      throw new Error("Cannot proceed without r1cs files");
+    }
+
+    // Verify that r1cs files were successfully downloaded
+    if (!hasRequiredR1csFiles()) {
+      throw new Error("R1CS files download seemed to succeed but required files are still missing");
+    }
+
+    console.log(`✅ R1CS files downloaded successfully`);
+  } else {
+    console.log(`R1CS files already exist locally with required files.`);
+  }
+
+  // Cross-check r1cs files with S3
+  crossCheckR1csFilesWithS3();
+
+  return r1csFolderPath;
+}
+
+// Function to cross-check r1cs files with S3
+function crossCheckR1csFilesWithS3(): boolean {
+  if (!isAwsCliAvailable()) {
+    console.warn("AWS CLI not available. Skipping r1cs files cross-check with S3.");
+    return false;
+  }
+
+  const r1csFolder = "r1cs";
+  const r1csFolderPath = path.join(contributionRootFolder, r1csFolder);
+
+  try {
+    console.log(`Cross-checking r1cs files between S3 and local...`);
+
+    // Get list of r1cs files from S3
+    const s3FilesOutput = runAwsCommand(`aws s3 ls ${S3_BUCKET_PATH}/${r1csFolder}/ --recursive | awk '{print $4}' | sort`, "pipe");
+
+    if (!s3FilesOutput) {
+      console.warn(`No r1cs files found in S3`);
+      return false;
+    }
+
+    // Parse S3 files (remove the folder prefix from each file)
+    const s3Files = s3FilesOutput
+      .trim()
+      .split("\n")
+      .map((file) => file.replace(`${r1csFolder}/`, ""))
+      .filter(Boolean);
+
+    // Get local files
+    if (!fs.existsSync(r1csFolderPath)) {
+      console.warn(`Local r1cs folder does not exist`);
+      return false;
+    }
+
+    const getFilesRecursively = (dir: string, baseDir: string = dir): string[] => {
+      let results: string[] = [];
+      const files = fs.readdirSync(dir);
+
+      files.forEach((file) => {
+        const fullPath = path.join(dir, file);
+        const relativePath = path.relative(baseDir, fullPath);
+
+        if (fs.statSync(fullPath).isDirectory()) {
+          results = results.concat(getFilesRecursively(fullPath, baseDir));
+        } else {
+          results.push(relativePath);
+        }
+      });
+
+      return results;
+    };
+
+    const localFiles = getFilesRecursively(r1csFolderPath).sort();
+
+    // List of OS-specific files to ignore
+    const ignoreFiles = [".DS_Store", "Thumbs.db", ".directory", "._*"];
+
+    // Function to check if a file should be ignored
+    function shouldIgnoreFile(file: string): boolean {
+      return ignoreFiles.some((pattern) => {
+        if (pattern.endsWith("*")) {
+          return file.startsWith(pattern.slice(0, -1));
+        }
+        return file === pattern;
+      });
+    }
+
+    // Filter out ignored files from both lists
+    const filteredS3Files = s3Files.filter((file) => !shouldIgnoreFile(file));
+    const filteredLocalFiles = localFiles.filter((file) => !shouldIgnoreFile(file));
+
+    // Find missing files (ignoring OS-specific files)
+    const missingLocalFiles = filteredS3Files.filter((file) => !filteredLocalFiles.includes(file));
+    const missingS3Files = filteredLocalFiles.filter((file) => !filteredS3Files.includes(file));
+
+    if (missingLocalFiles.length > 0) {
+      console.warn(`Missing ${missingLocalFiles.length} r1cs files locally that exist in S3:`);
+      missingLocalFiles.forEach((file) => console.warn(`  - ${file}`));
+
+      // Download missing files
+      const shouldDownload = missingLocalFiles.some((file) => file.endsWith(".r1cs"));
+      if (shouldDownload) {
+        console.log(`Attempting to download missing r1cs files...`);
+
+        // Create directory if it doesn't exist
+        fs.ensureDirSync(r1csFolderPath);
+
+        // Download each missing file
+        let downloadedCount = 0;
+        for (const file of missingLocalFiles) {
+          const s3Path = `${S3_BUCKET_PATH}/${r1csFolder}/${file}`;
+          const localFilePath = path.join(r1csFolderPath, file);
+
+          // Make sure the directory for the file exists
+          fs.ensureDirSync(path.dirname(localFilePath));
+
+          console.log(`Downloading ${file}...`);
+          const downloadCmd = `aws s3 cp ${s3Path} ${localFilePath}`;
+          try {
+            runAwsCommand(downloadCmd);
+            downloadedCount++;
+          } catch (error) {
+            console.error(`Failed to download ${file}: ${error}`);
+          }
+        }
+
+        console.log(`Downloaded ${downloadedCount}/${missingLocalFiles.length} missing r1cs files.`);
+      }
+    }
+
+    // Report missing S3 files (ignoring OS-specific files)
+    if (missingS3Files.length > 0) {
+      console.log(`${missingS3Files.length} r1cs files exist locally but not in S3 (OS-specific files ignored)`);
+    }
+
+    // Special check for r1cs files
+    const s3R1csFiles = filteredS3Files.filter((file) => file.endsWith(".r1cs"));
+    const localR1csFiles = filteredLocalFiles.filter((file) => file.endsWith(".r1cs"));
+
+    if (s3R1csFiles.length > localR1csFiles.length) {
+      console.warn(`Missing ${s3R1csFiles.length - localR1csFiles.length} r1cs files locally`);
+    } else if (localR1csFiles.length === s3R1csFiles.length && missingLocalFiles.some((file) => file.endsWith(".r1cs"))) {
+      console.log(`All r1cs files are now available locally.`);
+    }
+
+    // Re-check after download
+    if (missingLocalFiles.length > 0) {
+      const newLocalFiles = getFilesRecursively(r1csFolderPath)
+        .filter((file) => !shouldIgnoreFile(file))
+        .sort();
+
+      const stillMissing = filteredS3Files.filter((file) => !newLocalFiles.includes(file));
+
+      if (stillMissing.length > 0) {
+        console.warn(`Still missing ${stillMissing.length} r1cs files after download attempt.`);
+        return false;
+      } else {
+        console.log(`All required r1cs files are now present locally.`);
+        return true;
+      }
+    }
+
+    return missingLocalFiles.length === 0;
+  } catch (error) {
+    console.error("Error cross-checking r1cs files with S3:", error);
+    return false;
+  }
 }
