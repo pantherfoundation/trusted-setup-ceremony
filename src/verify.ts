@@ -2,7 +2,6 @@ import { execSync } from "child_process";
 import * as path from "path";
 import * as fs from "fs-extra";
 import {
-  contributionRootFolder,
   getContributionFolders,
   getZkeyFiles,
   downloadFromS3,
@@ -11,6 +10,7 @@ import {
   checkRequiredEnvVars,
   isAwsCliAvailable,
 } from "./utils";
+import { CONTRIBUTION_ROOT_FOLDER } from "./constants";
 
 interface VerificationResult {
   contributionFolder: string;
@@ -92,12 +92,12 @@ function verifyContribution(
     }
 
     const fullInitialZkeyPath = path.join(
-      contributionRootFolder,
+      CONTRIBUTION_ROOT_FOLDER,
       initialFolder,
       initialZkeyFile,
     );
     const fullContributionZkeyPath = path.join(
-      contributionRootFolder,
+      CONTRIBUTION_ROOT_FOLDER,
       contributionFolder,
       zkeyFile,
     );
@@ -219,7 +219,7 @@ function main(): void {
     }
 
     // Create the contributions directory if it doesn't exist
-    fs.ensureDirSync(contributionRootFolder);
+    fs.ensureDirSync(CONTRIBUTION_ROOT_FOLDER);
 
     // Ensure we have the PTAU file
     const ptauFile = ensurePtauFile();

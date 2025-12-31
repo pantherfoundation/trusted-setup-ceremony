@@ -2,10 +2,8 @@ import * as fs from "fs-extra";
 import * as path from "path";
 import { execSync } from "child_process";
 import {
-  contributionRootFolder,
   downloadLatestContribution,
   getZkeyFiles,
-  getCircuitR1cs,
   ensurePtauFile,
   uploadToS3,
   checkRequiredEnvVars,
@@ -14,6 +12,7 @@ import {
   crossCheckFilesWithS3,
   ensureR1csFiles,
 } from "./utils";
+import { CONTRIBUTION_ROOT_FOLDER } from "./constants";
 
 const BEACON_HASH =
   "0x81d94f995b977ba0ecff48f8a6687aeb90025f4142743d7135bcf9751195541d";
@@ -32,7 +31,7 @@ function executeCommand(command: string): void {
 }
 
 function getFinalFolderPath(): string {
-  return path.join(contributionRootFolder, FINAL_FOLDER_NAME);
+  return path.join(CONTRIBUTION_ROOT_FOLDER, FINAL_FOLDER_NAME);
 }
 
 function applyRandomBeacon(lastContributionFolder: string): void {
@@ -43,7 +42,7 @@ function applyRandomBeacon(lastContributionFolder: string): void {
 
   const finalFolderPath = getFinalFolderPath();
   const lastFolderPath = path.join(
-    contributionRootFolder,
+    CONTRIBUTION_ROOT_FOLDER,
     lastContributionFolder,
   );
   const r1csFolderPath = ensureR1csFiles();

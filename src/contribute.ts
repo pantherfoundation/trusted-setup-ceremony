@@ -4,7 +4,6 @@ import * as readlineSync from "readline-sync";
 import * as path from "path";
 import * as crypto from "crypto";
 import {
-  contributionRootFolder,
   getContributionFolders,
   getZkeyFiles,
   downloadLatestContribution,
@@ -14,6 +13,7 @@ import {
   checkRequiredEnvVars,
   isAwsCliAvailable,
 } from "./utils";
+import { CONTRIBUTION_ROOT_FOLDER } from "./constants";
 
 interface ContributionConfig {
   contributionNumber: string;
@@ -84,7 +84,7 @@ function collectAdditionalEntropy(): string {
 
 function setupContribution(): ContributionConfig {
   // Ensure the contributions folder exists
-  fs.ensureDirSync(contributionRootFolder);
+  fs.ensureDirSync(CONTRIBUTION_ROOT_FOLDER);
 
   const contributionFolders = getContributionFolders();
 
@@ -97,7 +97,7 @@ function setupContribution(): ContributionConfig {
 
     if (
       !s3Folder &&
-      !fs.existsSync(path.join(contributionRootFolder, "0000_initial"))
+      !fs.existsSync(path.join(CONTRIBUTION_ROOT_FOLDER, "0000_initial"))
     ) {
       throw new Error(
         "Initial setup folder '0000_initial' not found. Please ensure it exists with the initial circuit files.\n" +
@@ -127,7 +127,7 @@ function setupContribution(): ContributionConfig {
   const githubUsername = readlineSync.question("Enter your GitHub username: ");
   const folderName = `${contributionNumber}_${githubUsername}`;
 
-  fs.mkdirSync(path.join(contributionRootFolder, folderName), {
+  fs.mkdirSync(path.join(CONTRIBUTION_ROOT_FOLDER, folderName), {
     recursive: true,
   });
 
@@ -147,9 +147,9 @@ function contributeToZkey(
 ): ZkeyContribution {
   console.log(`\nProcessing ${zkeyFile}...`);
 
-  const latestZkey = path.join(contributionRootFolder, lastFolder, zkeyFile);
+  const latestZkey = path.join(CONTRIBUTION_ROOT_FOLDER, lastFolder, zkeyFile);
   const newZkey = path.join(
-    contributionRootFolder,
+    CONTRIBUTION_ROOT_FOLDER,
     config.folderName,
     zkeyFile,
   );
@@ -169,13 +169,13 @@ function contributeToZkey(
   execSync(command, { stdio: "inherit" });
 
   const vkeyName = zkeyFile.replace(".zkey", "_verification_key.json");
-  const vkey = path.join(contributionRootFolder, config.folderName, vkeyName);
+  const vkey = path.join(CONTRIBUTION_ROOT_FOLDER, config.folderName, vkeyName);
   execSync(`snarkjs zkey export verificationkey ${newZkey} ${vkey}`, {
     stdio: "inherit",
   });
 
   const transcriptPath = path.join(
-    contributionRootFolder,
+    CONTRIBUTION_ROOT_FOLDER,
     config.folderName,
     `${zkeyFile}_transcript.txt`,
   );
@@ -202,13 +202,13 @@ function createMetadataFiles(
   contributions: ZkeyContribution[],
 ): void {
   fs.writeFileSync(
-    path.join(contributionRootFolder, config.folderName, "contribution.txt"),
+    path.join(CONTRIBUTION_ROOT_FOLDER, config.folderName, "contribution.txt"),
     `Contribution by ${config.githubUsername}\nTimestamp: ${config.timestamp}\n\nEntropy was generated using a secure method and has been deleted.`,
   );
 
   console.log("\nGenerating attestation file...");
   const attestationPath = path.join(
-    contributionRootFolder,
+    CONTRIBUTION_ROOT_FOLDER,
     config.folderName,
     "attestation.json",
   );

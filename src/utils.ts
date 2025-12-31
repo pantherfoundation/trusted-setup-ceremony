@@ -2,7 +2,7 @@ import * as fs from "fs-extra";
 import * as path from "path";
 import { execSync } from "child_process";
 import dotenv from "dotenv";
-import { S3_CONTRIBUTION_DIR } from "./constants";
+import { S3_CONTRIBUTION_DIR, CONTRIBUTION_ROOT_FOLDER } from "./constants";
 
 // Load environment variables from .env file - this works in local dev but may not in Docker
 dotenv.config();
@@ -48,8 +48,6 @@ export function checkRequiredEnvVars(): void {
   }
 }
 
-export const contributionRootFolder = "./contributions";
-
 // Get S3 configuration from environment variables
 const S3_BUCKET_PATH = process.env.S3BUCKET!;
 export const S3_BUCKET_NAME = S3_BUCKET_PATH.replace("s3://", "");
@@ -72,19 +70,19 @@ export function getDirectories(source: string): string[] {
 }
 
 export function getZkeyFiles(directory: string): string[] {
-  const zkFilesFolder = path.join(contributionRootFolder, directory);
+  const zkFilesFolder = path.join(CONTRIBUTION_ROOT_FOLDER, directory);
   return fs.readdirSync(zkFilesFolder).filter((file) => file.endsWith(".zkey"));
 }
 
 export function getContributionFolders(): string[] {
-  const folders = getDirectories(contributionRootFolder);
+  const folders = getDirectories(CONTRIBUTION_ROOT_FOLDER);
   const contributionFolders = folders.filter((f) => f.match(/^\d{4}_/));
   contributionFolders.sort();
   return contributionFolders;
 }
 
 export function getCircuitR1cs(initialFolder: string): string {
-  const folder = path.join(contributionRootFolder, initialFolder);
+  const folder = path.join(CONTRIBUTION_ROOT_FOLDER, initialFolder);
   const r1csFiles = fs
     .readdirSync(folder)
     .filter((file) => file.endsWith(".r1cs"));
@@ -145,8 +143,8 @@ export function downloadFromS3(prefix?: string): boolean {
   try {
     const s3Path = asS3Path(prefix || "/");
     const localPath = prefix
-      ? path.join(contributionRootFolder, prefix)
-      : contributionRootFolder;
+      ? path.join(CONTRIBUTION_ROOT_FOLDER, prefix)
+      : CONTRIBUTION_ROOT_FOLDER;
 
     // Ensure the local directory exists
     fs.ensureDirSync(localPath);
@@ -184,7 +182,7 @@ export function uploadToS3(folderName: string): boolean {
       return false;
     }
 
-    const localPath = path.join(contributionRootFolder, folderName);
+    const localPath = path.join(CONTRIBUTION_ROOT_FOLDER, folderName);
     const s3Path = asS3Path(folderName);
 
     console.log(`Uploading files from ${localPath} to ${s3Path}...`);
@@ -231,7 +229,7 @@ export function downloadLatestContribution(): string | null {
     console.log(`Latest contribution folder in S3: ${folderName}`);
 
     // Check if the folder already exists locally
-    const localPath = path.join(contributionRootFolder, folderName);
+    const localPath = path.join(CONTRIBUTION_ROOT_FOLDER, folderName);
 
     // Function to check if a folder has the required zkey files
     function hasRequiredZkeyFiles(folderPath: string): boolean {
@@ -286,10 +284,10 @@ export function downloadLatestContribution(): string | null {
 // Download initial setup if not available locally
 export function ensureInitialSetup(): void {
   const initialFolder = "0000_initial";
-  const localPath = path.join(contributionRootFolder, initialFolder);
+  const localPath = path.join(CONTRIBUTION_ROOT_FOLDER, initialFolder);
 
   // Create contributions root directory if it doesn't exist
-  fs.ensureDirSync(contributionRootFolder);
+  fs.ensureDirSync(CONTRIBUTION_ROOT_FOLDER);
 
   // Function to check if initial folder has required files
   function hasRequiredInitialFiles(): boolean {
@@ -360,7 +358,7 @@ export function crossCheckFilesWithS3(folderName: string): boolean {
       .filter(Boolean);
 
     // Get local files
-    const localPath = path.join(contributionRootFolder, folderName);
+    const localPath = path.join(CONTRIBUTION_ROOT_FOLDER, folderName);
     if (!fs.existsSync(localPath)) {
       console.warn(`Local folder ${folderName} does not exist`);
       return false;
@@ -516,14 +514,14 @@ export function crossCheckFilesWithS3(folderName: string): boolean {
 // Function to ensure the PTAU file is available
 export function ensurePtauFile(): string {
   const ptauFileName = "powersOfTau28_hez_final_18.ptau";
-  const ptauLocalPath = path.join(contributionRootFolder, ptauFileName);
+  const ptauLocalPath = path.join(CONTRIBUTION_ROOT_FOLDER, ptauFileName);
 
   // Check if PTAU file exists locally
   if (!fs.existsSync(ptauLocalPath)) {
     console.log(`PTAU file not found locally. Downloading from S3...`);
     try {
       // Ensure the directory exists
-      fs.ensureDirSync(contributionRootFolder);
+      fs.ensureDirSync(CONTRIBUTION_ROOT_FOLDER);
 
       // Use runAwsCommand for consistency
       runAwsCommand(
@@ -552,7 +550,7 @@ export function getR1csFolderPath(): string {
 // Function to ensure r1cs files are available
 export function ensureR1csFiles(): string {
   const r1csFolder = "r1cs";
-  const r1csFolderPath = path.join(contributionRootFolder, r1csFolder);
+  const r1csFolderPath = path.join(CONTRIBUTION_ROOT_FOLDER, r1csFolder);
 
   // Create r1cs directory if it doesn't exist
   fs.ensureDirSync(r1csFolderPath);
@@ -633,7 +631,7 @@ function crossCheckR1csFilesWithS3(): boolean {
   }
 
   const r1csFolder = "r1cs";
-  const r1csFolderPath = path.join(contributionRootFolder, r1csFolder);
+  const r1csFolderPath = path.join(CONTRIBUTION_ROOT_FOLDER, r1csFolder);
 
   try {
     console.log(`Cross-checking r1cs files between S3 and local...`);
