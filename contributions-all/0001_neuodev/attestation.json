@@ -1,0 +1,31 @@
+{
+  "contributor": "neuodev",
+  "contributionNumber": "0001",
+  "timestamp": "2026-01-26T11:45:35.653Z",
+  "files": [
+    {
+      "filename": "mainAmmV1.zkey",
+      "hash": "eb1eea8e05988914459c09a7077aa46a78de208979306b89a6af611342625799"
+    },
+    {
+      "filename": "mainTreeBatchUpdaterAndRootChecker.zkey",
+      "hash": "3a44151b9c403ba22cc54842fc0e99b17f51472a1f6cbacbfcc57190299cc0a6"
+    },
+    {
+      "filename": "mainZAccountRegistrationV1.zkey",
+      "hash": "f1649c476731d992e0800a9ff0cf1a3da02108284d1e5b6961881ae5f7082170"
+    },
+    {
+      "filename": "mainZAccountRenewalV1.zkey",
+      "hash": "bdca0baf970842679d37e3ae6e10fee2e745d7dab1a4f932349cfe2894572eb5"
+    },
+    {
+      "filename": "mainZSwapV1.zkey",
+      "hash": "abf959b669f9938e0375dd33e219e05f3d0cb079979503ce126c2b4b57429e4e"
+    },
+    {
+      "filename": "mainZTransactionV1.zkey",
+      "hash": "b0d69c8caeb953d42dc76bde7e213e96fb066969a771ce0cde8e8f33598e804a"
+    }
+  ]
+}

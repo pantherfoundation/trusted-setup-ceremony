@@ -513,7 +513,7 @@ export function crossCheckFilesWithS3(folderName: string): boolean {
 
 // Function to ensure the PTAU file is available
 export function ensurePtauFile(): string {
-  const ptauFileName = "powersOfTau28_hez_final_18.ptau";
+  const ptauFileName = "powersOfTau28_hez_final_19.ptau";
   const ptauLocalPath = path.join(CONTRIBUTION_ROOT_FOLDER, ptauFileName);
 
   // Check if PTAU file exists locally
