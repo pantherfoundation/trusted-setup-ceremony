@@ -1,0 +1,31 @@
+{
+  "contributor": "kuronosec",
+  "contributionNumber": "0003",
+  "timestamp": "2026-01-26T14:43:50.459Z",
+  "files": [
+    {
+      "filename": "mainAmmV1.zkey",
+      "hash": "db275f277c4f374e695014e6ef1a49b8d1f40c37a8a72a9a56a5ab33562c383c"
+    },
+    {
+      "filename": "mainTreeBatchUpdaterAndRootChecker.zkey",
+      "hash": "95c929c6181f72de6f3c191fc84b98183a539a1adc21e0a41fa32f2ad3ef133e"
+    },
+    {
+      "filename": "mainZAccountRegistrationV1.zkey",
+      "hash": "f1b57c796cf08278b3a89a74c8ae77f9e6e5e9192d58a77f710905f7a015ccd9"
+    },
+    {
+      "filename": "mainZAccountRenewalV1.zkey",
+      "hash": "c9ae961b7a20d94e0c16b4c05c68a844a0467b175aeafc62ea9a9e853eef842e"
+    },
+    {
+      "filename": "mainZSwapV1.zkey",
+      "hash": "cc958fa9931cc5fd5ffd932ec6a50570bb6b65d8daeb8c6da364e14e07cda8b9"
+    },
+    {
+      "filename": "mainZTransactionV1.zkey",
+      "hash": "ecde71baa58e01e19bdc4c5c402321025427555a7ea4ce074f652c7a147315f5"
+    }
+  ]
+}
