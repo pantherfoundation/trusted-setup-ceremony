@@ -1,0 +1,31 @@
+{
+  "contributor": "goragor11-droid",
+  "contributionNumber": "0011",
+  "timestamp": "2026-01-28T10:34:51.865Z",
+  "files": [
+    {
+      "filename": "mainAmmV1.zkey",
+      "hash": "405c085d500cc8bda4da4cf1aa970ad2889984f158a2a5b517ea3faad9cfb89f"
+    },
+    {
+      "filename": "mainTreeBatchUpdaterAndRootChecker.zkey",
+      "hash": "06c4cf0ec189d654359d5610c608c27be0e3cf8f11fc61bc92263b902d0c3979"
+    },
+    {
+      "filename": "mainZAccountRegistrationV1.zkey",
+      "hash": "107359a2eab0baf416a732e9726298754064d6da435698df0e0c41f96ee1c7a3"
+    },
+    {
+      "filename": "mainZAccountRenewalV1.zkey",
+      "hash": "3704b753767b3764cd83a85ef0a245d3102b100df90c55a56a3f0199d9f180da"
+    },
+    {
+      "filename": "mainZSwapV1.zkey",
+      "hash": "da63b1dd12a5c5c3fe669d4685b8398c3493488260e25b63fbf9620c5c16b8d0"
+    },
+    {
+      "filename": "mainZTransactionV1.zkey",
+      "hash": "5135445dcdf64687253a282ec8c5bc02f422cbbb751963c6a23265281a8aa358"
+    }
+  ]
+}
