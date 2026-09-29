@@ -12,8 +12,8 @@ import {
   crossCheckFilesWithS3,
   checkRequiredEnvVars,
   isAwsCliAvailable,
-} from "./utils";
-import { CONTRIBUTION_ROOT_FOLDER } from "./constants";
+} from "@/utils";
+import { CONTRIBUTION_ROOT_FOLDER } from "@/constants";
 
 interface ContributionConfig {
   contributionNumber: string;

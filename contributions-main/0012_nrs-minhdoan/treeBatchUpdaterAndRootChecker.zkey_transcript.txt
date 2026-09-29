@@ -1,2 +1,0 @@
-Contribution to treeBatchUpdaterAndRootChecker.zkey by nrs-minhdoan
-Timestamp: 2025-11-07T15:39:30.710Z

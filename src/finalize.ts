@@ -11,14 +11,13 @@ import {
   ensureInitialSetup,
   crossCheckFilesWithS3,
   ensureR1csFiles,
-} from "./utils";
-import { CONTRIBUTION_ROOT_FOLDER } from "./constants";
+} from "@/utils";
+import { CONTRIBUTION_ROOT_FOLDER, FINAL_FOLDER_NAME } from "@/constants";
 
 const BEACON_HASH =
   "0x81d94f995b977ba0ecff48f8a6687aeb90025f4142743d7135bcf9751195541d";
 const BLOCK_NUMBER = "22038000";
 const BEACON_ITERATIONS = 10; // Number of iterations for the beacon process
-const FINAL_FOLDER_NAME = "0023_final";
 
 function executeCommand(command: string): void {
   try {

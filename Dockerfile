@@ -4,19 +4,22 @@ FROM node:23-slim
 # Set working directory in the container
 WORKDIR /app
 
+# Enable pnpm through corepack (version pinned by "packageManager")
+RUN corepack enable
+
 # Copy package files for dependency installation
-COPY package*.json ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 # Install dependencies
-RUN npm install
+RUN pnpm install --frozen-lockfile
 
 # Copy only the TypeScript config and source files
 COPY tsconfig.json ./
 COPY src/ ./src/
-COPY .env.example ./
+COPY .env.example ipfs-manifest.json ./
 
 # Build TypeScript code
-RUN npm run build
+RUN pnpm build
 
 # Install AWS CLI with architecture detection
 RUN apt-get update && \
@@ -44,4 +47,4 @@ RUN apt-get update && \
 # Default command that will show usage information
 CMD ["sh", "-c", "echo \"Usage: docker run --rm -v $(pwd):/app trusted-setup [contribute|verify]\" && echo \"  - contribute: Run the contribution process\" && echo \"  - verify: Run the verification process\""]
 
-ENTRYPOINT ["npm", "run"]
+ENTRYPOINT ["pnpm", "run"]
