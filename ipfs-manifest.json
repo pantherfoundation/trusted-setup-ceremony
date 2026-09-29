@@ -1,0 +1,342 @@
+{
+  "0000_initial/mainAmmV1.zkey": {
+    "sha256": "e9766cf4e0f6dd432182b53cd2c827f8f4cdd99e2361dd36f7d62cf53338b796",
+    "size": 47277124
+  },
+  "0000_initial/mainTreeBatchUpdaterAndRootChecker.zkey": {
+    "sha256": "07c2f4a1b561b87736c2b92d91467bb07043f5dcf6c84347cc2711326602b604",
+    "size": 41865356
+  },
+  "0000_initial/mainZAccountRegistrationV1.zkey": {
+    "sha256": "0a442c087a1bd292a26845dc99b0fdf648a71ed133770b6f072aae15c1085480",
+    "size": 45578012
+  },
+  "0000_initial/mainZAccountRenewalV1.zkey": {
+    "sha256": "8da5379e9fdcb16584b272e292a50e53531a4fa116bb7b288ad5704a034c5c42",
+    "size": 51703728
+  },
+  "0000_initial/mainZSwapV1.zkey": {
+    "sha256": "6c923a2045cebeb0900faf361a0322a3728bdbae50ab15423201bdfcd975a90f",
+    "size": 143002768
+  },
+  "0000_initial/mainZTransactionV1.zkey": {
+    "sha256": "6f24dc645523b93a3773f1023cd76ad8efb023027c2d6c1efea6997c99e014a7",
+    "size": 119934752
+  },
+  "0001_neuodev/mainAmmV1.zkey": {
+    "sha256": "eb1eea8e05988914459c09a7077aa46a78de208979306b89a6af611342625799",
+    "size": 47277549
+  },
+  "0001_neuodev/mainTreeBatchUpdaterAndRootChecker.zkey": {
+    "sha256": "3a44151b9c403ba22cc54842fc0e99b17f51472a1f6cbacbfcc57190299cc0a6",
+    "size": 41865781
+  },
+  "0001_neuodev/mainZAccountRegistrationV1.zkey": {
+    "sha256": "f1649c476731d992e0800a9ff0cf1a3da02108284d1e5b6961881ae5f7082170",
+    "size": 45578437
+  },
+  "0001_neuodev/mainZAccountRenewalV1.zkey": {
+    "sha256": "bdca0baf970842679d37e3ae6e10fee2e745d7dab1a4f932349cfe2894572eb5",
+    "size": 51704153
+  },
+  "0001_neuodev/mainZSwapV1.zkey": {
+    "sha256": "abf959b669f9938e0375dd33e219e05f3d0cb079979503ce126c2b4b57429e4e",
+    "size": 143003193
+  },
+  "0001_neuodev/mainZTransactionV1.zkey": {
+    "sha256": "b0d69c8caeb953d42dc76bde7e213e96fb066969a771ce0cde8e8f33598e804a",
+    "size": 119935177
+  },
+  "0002_drbumglove-pixel/mainAmmV1.zkey": {
+    "sha256": "3ae555e6f660e209b1dbce5415b1b40bdfd9257dc347f2a7841ba4eb78e7c99d",
+    "size": 47277983
+  },
+  "0002_drbumglove-pixel/mainTreeBatchUpdaterAndRootChecker.zkey": {
+    "sha256": "d333bcb9f5a0c1968fc585eb0f4e902b444ab939be307707383daedc855e391f",
+    "size": 41866215
+  },
+  "0002_drbumglove-pixel/mainZAccountRegistrationV1.zkey": {
+    "sha256": "98cfab1cef38885982f76d0dffd745fb712e33cad858196b6ddf76c0d15d09a5",
+    "size": 45578871
+  },
+  "0002_drbumglove-pixel/mainZAccountRenewalV1.zkey": {
+    "sha256": "f92771e6c18b69715a114ce0af90bcffd96060cb1e3962c8866cbc7be9d26f22",
+    "size": 51704587
+  },
+  "0002_drbumglove-pixel/mainZSwapV1.zkey": {
+    "sha256": "3a136e42ec237afd19dfc12f48029b37c4ed22b2e998ecb09bea7d610f6f03ea",
+    "size": 143003627
+  },
+  "0002_drbumglove-pixel/mainZTransactionV1.zkey": {
+    "sha256": "e9b8778e2ce2642380817c2ac0b871a4e5cb644977bc022d2431d00b5f04fc5f",
+    "size": 119935611
+  },
+  "0003_truthixify/mainAmmV1.zkey": {
+    "sha256": "62aa85fabcf4d5a1fde9318f338bcbf69b6c7c73166be3e5a36e961903b9fe04",
+    "size": 47278411
+  },
+  "0003_truthixify/mainTreeBatchUpdaterAndRootChecker.zkey": {
+    "sha256": "aa320affde25ebe06630d8b1a5fa186a440181be25895a70ce61a5a66b7ec9bf",
+    "size": 41866643
+  },
+  "0003_truthixify/mainZAccountRegistrationV1.zkey": {
+    "sha256": "be90313cc0c0dd491a2af011b491c604b76c5c40e365827dfb34c605b091eed8",
+    "size": 45579299
+  },
+  "0003_truthixify/mainZAccountRenewalV1.zkey": {
+    "sha256": "f4fff469186dbd351659f9125f47eaeed6763bae7f367b4d5f698ef1f5004153",
+    "size": 51705015
+  },
+  "0003_truthixify/mainZSwapV1.zkey": {
+    "sha256": "7ee04d02442be69f7e933ba6778ca1a6189ad78ca3f3aecd76ea607a55b3d29f",
+    "size": 143004055
+  },
+  "0003_truthixify/mainZTransactionV1.zkey": {
+    "sha256": "5c29cb74db6b9a91fc163f58a9058e4d0b91ec69b2d99b1e7dfd0a1b38cb5f6c",
+    "size": 119936039
+  },
+  "0004_ovasylenko/mainAmmV1.zkey": {
+    "sha256": "6b810800496ba12eaa0d8e80ef18e22f469e7e0875b311ef41f0f178d529a49a",
+    "size": 47278839
+  },
+  "0004_ovasylenko/mainTreeBatchUpdaterAndRootChecker.zkey": {
+    "sha256": "160d5363bfa6ae8783b8ab1e260f5c3787dfe0c21ff8ba5fe8a1915a55a14136",
+    "size": 41867071
+  },
+  "0004_ovasylenko/mainZAccountRegistrationV1.zkey": {
+    "sha256": "6f1b7a9f7731127f2e462112d879caab1c6aeeaee85cc4b16917c588e3963dac",
+    "size": 45579727
+  },
+  "0004_ovasylenko/mainZAccountRenewalV1.zkey": {
+    "sha256": "4e036264aa4c3e57491feef3892dd039a5f2e2db8d2599d7e9df4b43fdbb3853",
+    "size": 51705443
+  },
+  "0004_ovasylenko/mainZSwapV1.zkey": {
+    "sha256": "68c444ebff1c138ab8eba65ba68f2c71861d4a87f650f4a102b398868fe9a093",
+    "size": 143004483
+  },
+  "0004_ovasylenko/mainZTransactionV1.zkey": {
+    "sha256": "67dbe419eb65ce7c6ab8b606634763fc8a315c905e62f4911bea9c6528c0c92d",
+    "size": 119936467
+  },
+  "0005_olahamid/mainAmmV1.zkey": {
+    "sha256": "fcb03c6047b5d835aebab24e608779d1cbccbdc512c444f1707029ee346bb876",
+    "size": 47279265
+  },
+  "0005_olahamid/mainTreeBatchUpdaterAndRootChecker.zkey": {
+    "sha256": "e65e954eb1b9d3ec405340844f0d0b85b4e8724a7819a5ba445d037fd94f05dc",
+    "size": 41867497
+  },
+  "0005_olahamid/mainZAccountRegistrationV1.zkey": {
+    "sha256": "20cb0b64e9badf17105900400e8f8ab2f603eb0ae556ac4576c441dc8c400315",
+    "size": 45580153
+  },
+  "0005_olahamid/mainZAccountRenewalV1.zkey": {
+    "sha256": "1a770ab91c70b315b37aecf293b4ecdbfe1bdf981a01d6a0114dc53070365126",
+    "size": 51705869
+  },
+  "0005_olahamid/mainZSwapV1.zkey": {
+    "sha256": "9de5c4161f8162ce9dbd23a974c12af80293f93bb630b778f601bbcdcc331e0b",
+    "size": 143004909
+  },
+  "0005_olahamid/mainZTransactionV1.zkey": {
+    "sha256": "b7387ea43b50459660f738945b95cd4cac4f63fb3647404a5a420af14b5872f6",
+    "size": 119936893
+  },
+  "0006_c0st1a/mainAmmV1.zkey": {
+    "sha256": "d3c8b3e5ba1146e29dd8d3bc934eb6bfe8a094ca1ebbdcbba46d34d2b1d8e44e",
+    "size": 47279689
+  },
+  "0006_c0st1a/mainTreeBatchUpdaterAndRootChecker.zkey": {
+    "sha256": "5b0c5b14f596fa81ff8f6199c99199a1d5061371afe038465fe15cead5c351ea",
+    "size": 41867921
+  },
+  "0006_c0st1a/mainZAccountRegistrationV1.zkey": {
+    "sha256": "a263e307337cf9a91221ee0e1b239191f432313e4efe9d0ff928a5f9357086fd",
+    "size": 45580577
+  },
+  "0006_c0st1a/mainZAccountRenewalV1.zkey": {
+    "sha256": "26ab37376b112f9753d1dad625f608b9786dac0688fe6a12277f35c59c6152f3",
+    "size": 51706293
+  },
+  "0006_c0st1a/mainZSwapV1.zkey": {
+    "sha256": "6e96f22f6e6780606e5e0c474d55f95fadd140c1d641923a4428b0afc838f6d0",
+    "size": 143005333
+  },
+  "0006_c0st1a/mainZTransactionV1.zkey": {
+    "sha256": "6c5e6318220175bbba50f74398197609d83f51b6f9a28ad787a609024a1b8ba7",
+    "size": 119937317
+  },
+  "0007_beebozy/mainAmmV1.zkey": {
+    "sha256": "e69a1fbb4a2ac19889ee0a41ccbe1b48fc6001fcdd985c04e161be1c043c819f",
+    "size": 47280114
+  },
+  "0007_beebozy/mainTreeBatchUpdaterAndRootChecker.zkey": {
+    "sha256": "e2caea55b82226cae30ab0253c4e2ff25311df3dfd3ce9e9ce457bf3c38068c8",
+    "size": 41868346
+  },
+  "0007_beebozy/mainZAccountRegistrationV1.zkey": {
+    "sha256": "848fafe4bbeda22cf1e9b42896a66ebdb016aa868eab93bec93eb7c5e44267e5",
+    "size": 45581002
+  },
+  "0007_beebozy/mainZAccountRenewalV1.zkey": {
+    "sha256": "8aa85656215a74702cbbdca21a21b56b84170d2870c0d897f1a706564b7beca8",
+    "size": 51706718
+  },
+  "0007_beebozy/mainZSwapV1.zkey": {
+    "sha256": "330c3a53c9072259f82f8274855628347cb58a5504e8f1f9b659350e2d363b30",
+    "size": 143005758
+  },
+  "0007_beebozy/mainZTransactionV1.zkey": {
+    "sha256": "007c7f44dcc039aab90aa39727d318e2f80f90106aa55d410c77468603ed2667",
+    "size": 119937742
+  },
+  "0008_zpoken/mainAmmV1.zkey": {
+    "sha256": "41fff65c4652f89d3531c0a68879bdb8bc96a0f37b6d5229ff878893735c6da9",
+    "size": 47280538
+  },
+  "0008_zpoken/mainTreeBatchUpdaterAndRootChecker.zkey": {
+    "sha256": "dd2f978502eb6492fdf2505df3c8d7ad756d9f9138c9b49c9fc5ed2b6f1399e4",
+    "size": 41868770
+  },
+  "0008_zpoken/mainZAccountRegistrationV1.zkey": {
+    "sha256": "d7c3e089e6e8a4af94d76db2ed90315c38084e73596d48be0e6c5da3f54f9db7",
+    "size": 45581426
+  },
+  "0008_zpoken/mainZAccountRenewalV1.zkey": {
+    "sha256": "3e98eb95c7001aa21afcc2a5237eedab259c2933a89f8de051540fcc573a632b",
+    "size": 51707142
+  },
+  "0008_zpoken/mainZSwapV1.zkey": {
+    "sha256": "c00df317d82964bdc19e5b38dc3389516fcc3c47680964192f844aeb35b65037",
+    "size": 143006182
+  },
+  "0008_zpoken/mainZTransactionV1.zkey": {
+    "sha256": "3068b4d9e170d85fc9115e656a33961a3ef3be0fc9feb969ecf8010d3c4ea7a5",
+    "size": 119938166
+  },
+  "0009_kuronosec/mainAmmV1.zkey": {
+    "sha256": "1c09b65b9beb009b82e27c1bb622ae132c57d8156b19caab04cac8ae818d114b",
+    "size": 47280965
+  },
+  "0009_kuronosec/mainTreeBatchUpdaterAndRootChecker.zkey": {
+    "sha256": "c5ac17e247bebdf0d6895a78a27f2461934a71132f60ecefd311bed3c043017e",
+    "size": 41869197
+  },
+  "0009_kuronosec/mainZAccountRegistrationV1.zkey": {
+    "sha256": "742e29c9c2c5d5f9e8bb4c95aa9ea43e7965f1e47b05629b9393d39471713ae1",
+    "size": 45581853
+  },
+  "0009_kuronosec/mainZAccountRenewalV1.zkey": {
+    "sha256": "1392cd6e77ee34ffec9076ec006752ccc30d269ad9d13ad472d5bdf82c8688f5",
+    "size": 51707569
+  },
+  "0009_kuronosec/mainZSwapV1.zkey": {
+    "sha256": "b3161c1fe4a1cd2e7f617c7ee3aa6e7777cd9cb48e9e524416e00ae9b889a30e",
+    "size": 143006609
+  },
+  "0009_kuronosec/mainZTransactionV1.zkey": {
+    "sha256": "ad7203f88f94324fd132930b31f345d0c496ab820967c3b61cf84f406e6d5b41",
+    "size": 119938593
+  },
+  "0010_reubenyap/mainAmmV1.zkey": {
+    "sha256": "3241445ed7f20fcd06bf359c9256c48288758d72bdf65bd1f74d82ce76ee912e",
+    "size": 47281392
+  },
+  "0010_reubenyap/mainTreeBatchUpdaterAndRootChecker.zkey": {
+    "sha256": "cdbc2041432ec12baf0f344d5de7d061931bf3cdd56c13131c2a00d3b6ee552b",
+    "size": 41869624
+  },
+  "0010_reubenyap/mainZAccountRegistrationV1.zkey": {
+    "sha256": "3c7bb4173078cfb0fe9a9720120923e36e0f130531231da1fbf769272786a0eb",
+    "size": 45582280
+  },
+  "0010_reubenyap/mainZAccountRenewalV1.zkey": {
+    "sha256": "5bf67f1587baaccfc3e0d38f2eb4cec43fc0b5f238ba3d288b359c9f1232efa5",
+    "size": 51707996
+  },
+  "0010_reubenyap/mainZSwapV1.zkey": {
+    "sha256": "d27b5e928c2d647cdfdf9517d016b1944aca9c6685a6cdb0b931e2972ffe4136",
+    "size": 143007036
+  },
+  "0010_reubenyap/mainZTransactionV1.zkey": {
+    "sha256": "f010754c64b0be9ab98955046de99b689a10c780e9ef5548ea8ec55c0bda2807",
+    "size": 119939020
+  },
+  "0011_goragor11-droid/mainAmmV1.zkey": {
+    "sha256": "405c085d500cc8bda4da4cf1aa970ad2889984f158a2a5b517ea3faad9cfb89f",
+    "size": 47281825
+  },
+  "0011_goragor11-droid/mainTreeBatchUpdaterAndRootChecker.zkey": {
+    "sha256": "06c4cf0ec189d654359d5610c608c27be0e3cf8f11fc61bc92263b902d0c3979",
+    "size": 41870057
+  },
+  "0011_goragor11-droid/mainZAccountRegistrationV1.zkey": {
+    "sha256": "107359a2eab0baf416a732e9726298754064d6da435698df0e0c41f96ee1c7a3",
+    "size": 45582713
+  },
+  "0011_goragor11-droid/mainZAccountRenewalV1.zkey": {
+    "sha256": "3704b753767b3764cd83a85ef0a245d3102b100df90c55a56a3f0199d9f180da",
+    "size": 51708429
+  },
+  "0011_goragor11-droid/mainZSwapV1.zkey": {
+    "sha256": "da63b1dd12a5c5c3fe669d4685b8398c3493488260e25b63fbf9620c5c16b8d0",
+    "size": 143007469
+  },
+  "0011_goragor11-droid/mainZTransactionV1.zkey": {
+    "sha256": "5135445dcdf64687253a282ec8c5bc02f422cbbb751963c6a23265281a8aa358",
+    "size": 119939453
+  },
+  "0012_final/mainAmmV1.zkey": {
+    "sha256": "c9eb3b106ec06524509f5c956c7600b56d9e369109bc28a605e44f42b9b1a364",
+    "size": 47282297
+  },
+  "0012_final/mainTreeBatchUpdaterAndRootChecker.zkey": {
+    "sha256": "bc2c8d7cc4dbbc3832234ff7f5b6e3f87394b88748e4e8fc3a1041844ff5756f",
+    "size": 41870529
+  },
+  "0012_final/mainZAccountRegistrationV1.zkey": {
+    "sha256": "c216ba111d053d1d13984f8cbacc2aed8153e7e162bc002507bef99a593ea7e6",
+    "size": 45583185
+  },
+  "0012_final/mainZAccountRenewalV1.zkey": {
+    "sha256": "051092310b2441a9f139d45ed127e800dc3ea8479cbbbb6db03c98a9336fc56d",
+    "size": 51708901
+  },
+  "0012_final/mainZSwapV1.zkey": {
+    "sha256": "c7815a4ede38e14279b0b3d77de029520f251295e675dffa32bde94f7415a7cd",
+    "size": 143007941
+  },
+  "0012_final/mainZTransactionV1.zkey": {
+    "sha256": "6fbb61c2fa264089974fd0eb3023c72c008839bf994298b2f8d8fa04f8ac37f7",
+    "size": 119939925
+  },
+  "powersOfTau28_hez_final_19.ptau": {
+    "sha256": "3f428d1a407e4704ef906960e000b03089e5e6ec29bf65b07bb5e3de005f4700",
+    "size": 604062872
+  },
+  "r1cs/mainAmmV1.r1cs": {
+    "sha256": "bef5bda7d1794222e0de78cb26fc68ec70d9ff8d5ee3c066d3e70df6e8fa0d36",
+    "size": 15653892
+  },
+  "r1cs/mainTreeBatchUpdaterAndRootChecker.r1cs": {
+    "sha256": "6dee0a8ea066533ad546bdb230afa7daf18d81142f7c80ba667bd8988ef5b257",
+    "size": 12350896
+  },
+  "r1cs/mainZAccountRegistrationV1.r1cs": {
+    "sha256": "146d20fcada72581cf32e60e0d3c5423f0c0c67711f8dd1d4d2f62bda7cfb40a",
+    "size": 15157696
+  },
+  "r1cs/mainZAccountRenewalV1.r1cs": {
+    "sha256": "931c8ecf8c1da51ad2432e1f10454066a49ced13a547ff39292f8cd816d9e97f",
+    "size": 17394396
+  },
+  "r1cs/mainZSwapV1.r1cs": {
+    "sha256": "62bb308b44e95edaa3d1ad017502b1b20c4d81eff2c931af48ee8af930b97d97",
+    "size": 44620404
+  },
+  "r1cs/mainZTransactionV1.r1cs": {
+    "sha256": "97d150789a942519542a29ca2de54e77f82d32f2134450ca49127c75711f5164",
+    "size": 42293852
+  }
+}

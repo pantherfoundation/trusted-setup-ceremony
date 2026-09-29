@@ -1,6 +1,7 @@
 node_modules/
+dist/
 .DS_Store
-# Ignore large files stored in S3
+# Ignore large files distributed through IPFS (see ipfs-manifest.json)
 **/*.zkey
 **/*.r1cs
 **/*.ptau

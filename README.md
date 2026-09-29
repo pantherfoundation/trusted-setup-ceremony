@@ -6,6 +6,20 @@ This repository facilitates the trusted setup ceremony for a zero-knowledge circ
 
 The ceremony is sequential - each participant builds upon the previous contribution. This approach ensures the security of the final parameters as long as at least one participant is honest.
 
+## Ceremony Status
+
+The Panther Protocol v1 ceremony is **finalized**. It covers six circuits (`mainAmmV1`, `mainTreeBatchUpdaterAndRootChecker`, `mainZAccountRegistrationV1`, `mainZAccountRenewalV1`, `mainZSwapV1`, `mainZTransactionV1`) and consists of:
+
+- `contributions/0000_initial` - the coordinator's initial zkeys;
+- `contributions/0001_neuodev` to `contributions/0011_goragor11-droid` - 11 public contributions;
+- `contributions/0012_final` - the final zkeys and verification keys, after applying a random beacon from Ethereum block 22038000 (see `FinalAttestationFile.md`).
+
+This repository stores the attestations, transcripts and verification keys. The zkey and r1cs files are distributed through IPFS under the root CID [`bafybeia7mzvd6uzi5aeojwazef643hfea5t4nyn3d7fwf36il7lj4gwewy`](https://ipfs.filebase.io/ipfs/bafybeia7mzvd6uzi5aeojwazef643hfea5t4nyn3d7fwf36il7lj4gwewy), with the same layout as the `contributions` folder. Their SHA-256 hashes are listed in [`ipfs-manifest.json`](ipfs-manifest.json). The Phase 1 file, `powersOfTau28_hez_final_19.ptau`, is downloaded from its [original location](https://storage.googleapis.com/zkevm/ptau/powersOfTau28_hez_final_19.ptau).
+
+To verify the whole ceremony, run `pnpm install && pnpm verify` (see the [Verification Guide](#verification-guide)).
+
+The contribution and finalization instructions below are kept for reference. They rely on the S3 bucket used while the ceremony was running, which is no longer maintained.
+
 ## Time Commitment
 
 - **Preparation time**: ~5-15 minutes to set up your environment
@@ -89,21 +103,21 @@ Select **one** of the following contribution methods:
 #### Option A: Using Pre-built Docker Image
 
 ```bash
-docker run --user $(id -u):$(id -g) --rm -it --env-file .env -v $(pwd)/contributions-all:/app/contributions-all pantherprotocol/trusted-setup-ceremony:latest contribute
+docker run --user $(id -u):$(id -g) --rm -it --env-file .env -v $(pwd)/contributions:/app/contributions pantherprotocol/trusted-setup-ceremony:latest contribute
 ```
 
 #### Option B: Build Docker Image Yourself (Recommended)
 
 ```bash
 docker build -t trusted-setup-ceremony .
-docker run --user $(id -u):$(id -g) --rm -it --env-file .env -v $(pwd)/contributions-all:/app/contributions-all trusted-setup-ceremony contribute
+docker run --user $(id -u):$(id -g) --rm -it --env-file .env -v $(pwd)/contributions:/app/contributions trusted-setup-ceremony contribute
 ```
 
 #### Option C: Using Node.js Directly
 
 ```bash
-npm install
-npm run contribute
+pnpm install
+pnpm contribute
 ```
 
 ### 4. Interactive Contribution Process
@@ -124,7 +138,7 @@ Select **one** of the following verification methods:
 #### Option A: Using Pre-built Docker Image
 
 ```bash
-docker run --user $(id -u):$(id -g) --rm -it --env-file .env -v $(pwd)/contributions-all:/app/contributions-all pantherprotocol/trusted-setup-ceremony:latest verify
+docker run --user $(id -u):$(id -g) --rm -it -v $(pwd)/contributions:/app/contributions pantherprotocol/trusted-setup-ceremony:latest verify
 ```
 
 #### Option B: Build Docker Image Yourself (Recommended)
@@ -132,15 +146,15 @@ docker run --user $(id -u):$(id -g) --rm -it --env-file .env -v $(pwd)/contribut
 ```bash
 # Skip the command on the next line if you have executed it in the previous step
 docker build -t trusted-setup-ceremony .
-docker run --user $(id -u):$(id -g) --rm -it --env-file .env -v $(pwd)/contributions-all:/app/contributions-all trusted-setup-ceremony verify
+docker run --user $(id -u):$(id -g) --rm -it -v $(pwd)/contributions:/app/contributions trusted-setup-ceremony verify
 ```
 
 #### Option C: Using Node.js Directly
 
 ```bash
 # Skip the command on the next line if you have executed it in the previous step
-npm install
-npm run verify
+pnpm install
+pnpm verify
 ```
 
 For more detailed information about the verification process, see the [Verification Guide](#verification-guide) section below.
@@ -195,14 +209,19 @@ This section provides detailed information about the verification process, inclu
 
 ### Automatic File Downloads
 
-When running verification, the following will happen automatically if files are missing:
+`pnpm verify` checks every file it needs against [`ipfs-manifest.json`](ipfs-manifest.json) before using it. When a file is missing or does not match, it is downloaded:
 
-- **PTAU File**: The Powers of Tau file (powersOfTau28_hez_final_18.ptau) will be downloaded from S3 if not found locally
-- **Initial Setup**: If the initial setup folder (0000_initial) isn't present locally, it will be downloaded
-- **Contribution Folders**:
-  - If you have no contribution folders or only the initial setup folder, **all** contributions will be downloaded from S3
-  - If you already have multiple contribution folders, the verification will use your existing local files
-  - To force a fresh download of all contributions, delete the contributions folder first
+- **PTAU file**: `powersOfTau28_hez_final_19.ptau` is downloaded from its [original location](https://storage.googleapis.com/zkevm/ptau/powersOfTau28_hez_final_19.ptau). If you already have it, place it in `contributions/` to skip the download.
+- **Zkeys**: the zkeys of `0000_initial`, every contribution and `0012_final` are downloaded from IPFS. The gateways are tried in order and can be overridden with a comma-separated `IPFS_GATEWAYS` environment variable.
+- A downloaded file is only used if its SHA-256 matches the manifest. For contributions `0001` to `0012`, these hashes are also the ones published in each `attestation.json` and in `FinalAttestationFile.md`.
+
+About 5.5 GB is downloaded for a full verification. Files that are already present and valid are not downloaded again.
+
+To verify a copy you already have without any network access, use:
+
+```bash
+pnpm verify --local-dir <directory> [--ptau <file>]
+```
 
 ### Understanding Verification Results
 
@@ -234,9 +253,8 @@ Failed: 0
 
 If verification fails, check:
 
-- Network connectivity to download required files
-- S3 credentials if files can't be downloaded
-- Free disk space for downloaded files
+- Network connectivity to the IPFS gateways, or try another gateway with `IPFS_GATEWAYS`
+- Free disk space for downloaded files (about 6 GB)
 - Whether the initial zkey files match the contribution files being verified
 
 ## Platform-Specific Instructions
@@ -252,19 +270,19 @@ For Windows users, adjust commands as follows:
 **PowerShell:**
 
 ```powershell
-docker run--user $(id -u):$(id -g) --rm -it --env-file .env -v ${PWD}/contributions-all:/app/contributions-all pantherprotocol/trusted-setup-ceremony contribute
+docker run--user $(id -u):$(id -g) --rm -it --env-file .env -v ${PWD}/contributions:/app/contributions pantherprotocol/trusted-setup-ceremony contribute
 ```
 
 **Command Prompt:**
 
 ```cmd
-docker run --user $(id -u):$(id -g) --rm -it --env-file .env -v %cd%/contributions-all:/app/contributions-all pantherprotocol/trusted-setup-ceremony contribute
+docker run --user $(id -u):$(id -g) --rm -it --env-file .env -v %cd%/contributions:/app/contributions pantherprotocol/trusted-setup-ceremony contribute
 ```
 
 **For path-related issues**, use absolute paths:
 
 ```cmd
-docker run --user $(id -u):$(id -g) --rm -it --env-file .env -v C:\full\path\to\trusted-setup-contributions-all:/app/contributions-all pantherprotocol/trusted-setup-ceremony contribute
+docker run --user $(id -u):$(id -g) --rm -it --env-file .env -v C:\full\path\to\trusted-setup-ceremony\contributions:/app/contributions pantherprotocol/trusted-setup-ceremony contribute
 ```
 
 ## Technical Details

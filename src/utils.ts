@@ -2,7 +2,7 @@ import * as fs from "fs-extra";
 import * as path from "path";
 import { execSync } from "child_process";
 import dotenv from "dotenv";
-import { S3_CONTRIBUTION_DIR, CONTRIBUTION_ROOT_FOLDER } from "./constants";
+import { S3_CONTRIBUTION_DIR, CONTRIBUTION_ROOT_FOLDER } from "@/constants";
 
 // Load environment variables from .env file - this works in local dev but may not in Docker
 dotenv.config();
@@ -48,8 +48,9 @@ export function checkRequiredEnvVars(): void {
   }
 }
 
-// Get S3 configuration from environment variables
-const S3_BUCKET_PATH = process.env.S3BUCKET!;
+// Get S3 configuration from environment variables. S3 is only used by the
+// legacy contribute/finalize flows, so a missing value must not break imports.
+const S3_BUCKET_PATH = process.env.S3BUCKET ?? "";
 export const S3_BUCKET_NAME = S3_BUCKET_PATH.replace("s3://", "");
 export const AWS_REGION = process.env.AWS_DEFAULT_REGION!;
 export const AWS_ENDPOINT = process.env.AWS_ENDPOINT_URL!;

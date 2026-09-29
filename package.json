@@ -2,11 +2,12 @@
   "name": "trusted-setup",
   "version": "1.0.0",
   "description": "Trusted setup ceremony for ZK circuit",
+  "packageManager": "pnpm@12.3.4",
   "scripts": {
-    "build": "tsc",
-    "contribute": "ts-node src/contribute.ts",
-    "verify": "ts-node src/verify.ts",
-    "finalize": "ts-node src/finalize.ts",
+    "build": "tsc && tsc-alias",
+    "contribute": "pnpm build && node dist/contribute.js",
+    "verify": "pnpm build && node dist/verify.js",
+    "finalize": "pnpm build && node dist/finalize.js",
     "clean:zkey": "rm -rf ./contributions/**/*.zkey"
   },
   "dependencies": {
@@ -22,7 +23,7 @@
     "@types/fs-extra": "^11.0.1",
     "@types/node": "^18.15.11",
     "@types/readline-sync": "^1.4.4",
-    "ts-node": "^10.9.1",
+    "tsc-alias": "^1.9.5",
     "typescript": "^5.0.4"
   }
 }

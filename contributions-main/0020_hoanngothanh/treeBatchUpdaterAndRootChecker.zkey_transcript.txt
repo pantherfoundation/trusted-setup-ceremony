@@ -1,2 +1,0 @@
-Contribution to treeBatchUpdaterAndRootChecker.zkey by hoanngothanh
-Timestamp: 2025-11-12T03:44:21.680Z
